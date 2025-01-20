@@ -1,8 +1,9 @@
 import reactLogo from "../assets/react.svg";
 import viteLogo from "/vite.svg";
 import Provider from "./provider";
-import { Timeline } from "@/components/timeline";
-import { Stepper } from "@/components/stepper";
+// import { Timeline } from "@/components/timeline";
+import { Stepper } from "@/components/stepper-timeline";
+import ThemeSwitch from "@/components/theme-switch";
 
 export function App() {
   return (
@@ -16,28 +17,9 @@ export function App() {
             <img src={reactLogo} className="logo react" alt="React logo" />
           </a>
         </div>
-        <Timeline />
-        <Stepper
-          steps={[
-            {
-              title: "Picked Up",
-              description: "Saturday Nov 10",
-              status: "completed" as const,
-            },
-            {
-              title: "Processing",
-              status: "current" as const,
-            },
-            {
-              title: "Out for Delivery",
-              status: "pending" as const,
-            },
-            {
-              title: "Delivered",
-              status: "pending" as const,
-            },
-          ]}
-        />
+        <ThemeSwitch />
+        {/* <Timeline /> */}
+        <Stepper />
       </div>
     </Provider>
   );
