@@ -9,7 +9,7 @@ export function Stepper() {
     },
     {
       title: "Processing",
-      status: "completed" as const,
+      status: "current" as const,
     },
     {
       title: "Out for Delivery",

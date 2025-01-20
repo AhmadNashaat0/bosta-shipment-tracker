@@ -23,7 +23,7 @@ export function StepperTimeline({
   return (
     <div
       className={cn(
-        "w-full flex bg-red-200",
+        "w-full flex",
         isVertical ? " flex-col" : " flex-row ",
         className
       )}
@@ -80,7 +80,7 @@ export function StepperTimeline({
             {/* Content */}
             <div
               className={cn(
-                "flex min-w-0 flex-col bg-green-300",
+                "flex min-w-0 flex-col sm:text-center",
                 isVertical ? "mt-0 ml-4" : "mt-1"
               )}
             >

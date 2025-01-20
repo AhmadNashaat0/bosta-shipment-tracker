@@ -1,26 +1,125 @@
-export function Timeline() {
+import { useState } from "react";
+import { Circle, ChevronDown } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/utils";
+
+interface TrackingEvent {
+  date: string;
+  events: {
+    time: string;
+    description: string;
+    location?: string;
+  }[];
+}
+
+const trackingData: TrackingEvent[] = [
+  {
+    date: "Monday, February 18, 2021",
+    events: [
+      {
+        time: "2:42 PM",
+        description:
+          "The order has been created. When the merchant is ready, we will receive the shipment",
+      },
+      {
+        time: "2:42 PM",
+        description:
+          "The order has been received at a warehouse in Bosta and is being prepared.",
+        location: "Katameya, Cairo",
+      },
+    ],
+  },
+  {
+    date: "Sunday, February 17, 2021",
+    events: [
+      {
+        time: "2:42 PM",
+        description: "The order is being delivered",
+      },
+      {
+        time: "2:42 PM",
+        description:
+          "The delivery of the order has been postponed because we were unable to contact you by phone",
+        location: "Katameya, Cairo",
+      },
+      {
+        time: "2:42 PM",
+        description:
+          "The order has been received at a warehouse in Bosta and is being prepared.",
+        location: "Katameya, Cairo",
+      },
+    ],
+  },
+  {
+    date: "Saturday, February 16, 2021",
+    events: [
+      {
+        time: "2:42 PM",
+        description: "The order is being delivered",
+      },
+    ],
+  },
+];
+
+export default function TrackingTimeline() {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const displayData = isExpanded ? trackingData : trackingData.slice(0, 1);
+
   return (
-    <ol className="relative text-gray-500 border-s border-gray-200 ">
-      <TimelineItem title="Personal Info" description="Step details here" />
-      <TimelineItem title="Account Info" description="Step details here" />
-      <TimelineItem title="Review" description="Step details here" />
-      <TimelineItem title="Confirmation" description="Step details here" />
-    </ol>
+    <div>
+      <div className="flex flex-col gap-6">
+        {displayData.map((day) => (
+          <TrackingEvent event={day} />
+        ))}
+      </div>
+
+      {trackingData.length > 1 && (
+        <Button
+          variant="ghost"
+          className="w-full mt-4 flex items-center gap-2"
+          onClick={() => setIsExpanded(!isExpanded)}
+        >
+          More
+          <ChevronDown
+            className={cn(
+              "w-4 h-4 transition-transform",
+              isExpanded && "rotate-180"
+            )}
+          />
+        </Button>
+      )}
+    </div>
   );
 }
 
-function TimelineItem({
-  title,
-  description,
-}: {
-  title: string;
-  description: string;
-}) {
+function TrackingEvent({ event }: { event: TrackingEvent }) {
   return (
-    <li className="">
-      <span className=" flex items-center justify-center w-4 h-4 bg-green-200 rounded-full -start-4 dark:bg-green-900"></span>
-      <h3 className="font-medium leading-tight">{title}</h3>
-      <p className="text-sm">{description}</p>
-    </li>
+    <div key={event.date} className="relative">
+      <div className="relative pl-6">
+        <Circle
+          className="w-3 h-3 text-muted-foreground shrink-0 absolute left-0 top-1.5"
+          fill="currentColor"
+        />
+        <div className="font-medium">{event.date}</div>
+      </div>
+
+      <div className="relative flex flex-col gap-4 py-4 ">
+        <div className="absolute h-full left-[6px] border-l-2 top-0" />
+        {event.events.map((event) => (
+          <div
+            key={event.description}
+            className={cn("border rounded-lg p-4 ml-6")}
+          >
+            <div className="text-sm text-muted-foreground">{event.time}</div>
+            <div className="mt-1">{event.description}</div>
+            {event.location && (
+              <div className="mt-1 text-sm text-muted-foreground">
+                {event.location}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
