@@ -27,8 +27,12 @@ export function ShipmentPage() {
         />
         {shipmentQuery?.data && !shipmentQuery.isError && (
           <>
-            <ShipmentDetails shipment={shipmentQuery?.data} />
-            <TrackingDetails />
+            <ShipmentDetails shipment={shipmentQuery.data} />
+            {shipmentQuery.data.TransitEvents && (
+              <TrackingDetails
+                trackingDetails={shipmentQuery.data.TransitEvents}
+              />
+            )}
           </>
         )}
       </div>
