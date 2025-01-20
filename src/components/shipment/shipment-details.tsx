@@ -2,10 +2,10 @@ import { useTranslation } from "react-i18next";
 import { Stepper } from "../stepper-timeline";
 import { Shipment } from "./types";
 import { format } from "date-fns";
-import { ar } from "date-fns/locale";
+import { ar, enUS } from "date-fns/locale";
 
 export function ShipmentDetails({ shipment }: { shipment: Shipment }) {
-  const { t } = useTranslation("ShipmentDetails");
+  const { t, i18n } = useTranslation("ShipmentDetails");
   return (
     <div className="relative border rounded-md">
       <div className="p-4 border-b flex flex-col gap-1">
@@ -19,7 +19,7 @@ export function ShipmentDetails({ shipment }: { shipment: Shipment }) {
           <p className="text-sm">
             {shipment.TransitEvents[shipment.TransitEvents.length - 1].state}{" "}
             {format(shipment.CurrentStatus.timestamp, "EEEE, MMMM d, yyyy", {
-              locale: ar,
+              locale: i18n.language === "ar" ? ar : enUS,
             })}
           </p>
         )}
