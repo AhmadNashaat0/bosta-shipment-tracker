@@ -5,10 +5,12 @@ import bostaEnglishLogo from "/bosta-english-logo.svg";
 
 export function Header() {
   return (
-    <header className="container w-full py-3 flex justify-between items-center">
-      {/* <img src={bostaArabicLogo} className=cn() alt="bosta logo" /> */}
-      <img src={bostaEnglishLogo} className={cn()} alt="bosta logo" />
-      <ThemeSwitch />
+    <header className="w-full bg-muted">
+      <div className="container mx-auto py-3 flex justify-between items-center">
+        {/* <img src={bostaArabicLogo} className=cn() alt="bosta logo" /> */}
+        <img src={bostaEnglishLogo} className={cn()} alt="bosta logo" />
+        <ThemeSwitch />
+      </div>
     </header>
   );
 }
