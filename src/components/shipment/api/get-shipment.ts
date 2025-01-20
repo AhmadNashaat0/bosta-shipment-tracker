@@ -1,11 +1,13 @@
 import { useQuery, queryOptions } from "@tanstack/react-query";
 import { api } from "@/lib/api-client";
+import { Shipment } from "../type";
+import { QueryConfig } from "@/lib/react-query";
 
 export const getShipment = ({
   trackNumber,
 }: {
   trackNumber: string;
-}): Promise<{ data: any }> => {
+}): Promise<Shipment> => {
   return api.get(`shipments/track/${trackNumber}`);
 };
 
@@ -18,7 +20,7 @@ export const getShipmentQueryOptions = (trackNumber: string) => {
 
 type UseShipmentOptions = {
   trackNumber: string;
-  queryConfig?: any;
+  queryConfig?: QueryConfig<typeof getShipmentQueryOptions>;
 };
 
 export const useShipment = ({

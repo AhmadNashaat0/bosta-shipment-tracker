@@ -9,14 +9,13 @@ import { useState } from "react";
 export function ShipmentPage() {
   const { getSearchParam } = useSearchParams();
   const [trackNumber, setTrackNumber] = useState(getSearchParam("trackNumber"));
+
   const shipmentQuery = useShipment({
     trackNumber: trackNumber ?? "",
     queryConfig: {
       enabled: !!trackNumber,
     },
   });
-
-  console.log(shipmentQuery.data);
 
   return (
     <>
@@ -26,8 +25,12 @@ export function ShipmentPage() {
           className="absolute left-0 right-0 -top-[30px] z-10"
           setTrackNumber={setTrackNumber}
         />
-        <ShipmentDetails />
-        <TrackingDetails />
+        {shipmentQuery?.data && !shipmentQuery.isError && (
+          <>
+            <ShipmentDetails status={shipmentQuery?.data?.CurrentStatus} />
+            <TrackingDetails />
+          </>
+        )}
       </div>
     </>
   );

@@ -1,6 +1,6 @@
 import { StepperTimeline } from "./stepper-timline";
 
-export function Stepper() {
+export function Stepper({ state }: { state: string }) {
   const steps = [
     {
       title: "Picked Up",
@@ -23,6 +23,7 @@ export function Stepper() {
 
   return (
     <>
+      {state}
       <StepperTimeline className="hidden sm:flex" steps={steps} />
       <StepperTimeline
         className="block sm:hidden"

@@ -9,3 +9,8 @@ export const queryConfig = {
     staleTime: 1000 * 60 * STALE_TIME_IN_MINUTES,
   },
 } satisfies DefaultOptions;
+
+export type QueryConfig<T extends (...args: any[]) => any> = Omit<
+  ReturnType<T>,
+  "queryKey" | "queryFn"
+>;
