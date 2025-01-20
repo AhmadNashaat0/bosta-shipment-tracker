@@ -2,15 +2,34 @@ import { cn } from "@/utils";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { SearchIcon } from "lucide-react";
+import { useSearchParams } from "@/utils/useSearchParams";
 
-export function ShipmentSearch({ className }: { className?: string }) {
+export function ShipmentSearch({
+  className,
+  setTrackNumber,
+}: {
+  className?: string;
+  setTrackNumber: (trackNumber: string) => void;
+}) {
+  const { getSearchParam, setSearchParam } = useSearchParams();
   return (
     <div className={cn("hidden sm:block w-full", className)}>
-      <form className={cn("flex w-full max-w-md items-center mx-auto")}>
+      <form
+        className={cn("flex w-full max-w-md items-center mx-auto")}
+        onSubmit={(event) => {
+          event.preventDefault();
+          const formData = new FormData(event.target as HTMLFormElement);
+          const trackNumber = formData.get("trackNumber");
+          setSearchParam("trackNumber", trackNumber?.toString() || "");
+          setTrackNumber(trackNumber?.toString() || "");
+        }}
+      >
         <Input
           className={cn("rounded-r-none rounded-l-lg h-16 bg-background")}
           type="search"
           placeholder="Tracking No."
+          name="trackNumber"
+          defaultValue={getSearchParam("trackNumber") || undefined}
         />
         <Button
           type="submit"
