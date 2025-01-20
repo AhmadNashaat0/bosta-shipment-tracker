@@ -69,7 +69,7 @@ export default function TrackingTimeline() {
     <div>
       <div className="flex flex-col gap-6">
         {displayData.map((day) => (
-          <TrackingEvent event={day} />
+          <TrackingEvent event={day} key={day.date} />
         ))}
       </div>
 
@@ -94,7 +94,7 @@ export default function TrackingTimeline() {
 
 function TrackingEvent({ event }: { event: TrackingEvent }) {
   return (
-    <div key={event.date} className="relative">
+    <div className="relative">
       <div className="relative pl-6">
         <Circle
           className="w-3 h-3 text-muted-foreground shrink-0 absolute left-0 top-1.5"

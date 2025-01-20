@@ -1,5 +1,6 @@
-import { ShipmentPage } from "@/components/shipment";
+import "@/i18n";
 import Provider from "./provider";
+import { ShipmentPage } from "@/components/shipment";
 import { Header } from "@/components/header";
 
 export function App() {

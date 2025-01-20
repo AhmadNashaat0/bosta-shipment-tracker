@@ -2,6 +2,7 @@ import { cn } from "@/utils";
 import ThemeSwitch from "./theme-switch";
 // import bostaArabicLogo from "/bosta-arabic-logo.svg";
 import bostaEnglishLogo from "/bosta-english-logo.svg";
+import { LocalSelect } from "./local-select";
 
 export function Header() {
   return (
@@ -9,7 +10,10 @@ export function Header() {
       <div className="container mx-auto py-3 flex justify-between items-center">
         {/* <img src={bostaArabicLogo} className=cn() alt="bosta logo" /> */}
         <img src={bostaEnglishLogo} className={cn()} alt="bosta logo" />
-        <ThemeSwitch />
+        <div className="flex gap-2 items-center">
+          <ThemeSwitch />
+          <LocalSelect />
+        </div>
       </div>
     </header>
   );
