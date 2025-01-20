@@ -27,7 +27,7 @@ export function ShipmentPage() {
         />
         {shipmentQuery?.data && !shipmentQuery.isError && (
           <>
-            <ShipmentDetails status={shipmentQuery?.data?.CurrentStatus} />
+            <ShipmentDetails shipment={shipmentQuery?.data} />
             <TrackingDetails />
           </>
         )}

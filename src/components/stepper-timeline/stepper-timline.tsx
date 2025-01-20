@@ -1,20 +1,35 @@
 import { cn } from "@/utils";
 import { Check } from "lucide-react";
 
-interface TimelineStep {
+type TimelineStep = {
   title: string;
   description?: string;
-  status: "completed" | "current" | "pending";
-}
+  status?: "completed" | "current" | "pending";
+};
 
-interface TimelineProps {
-  steps: TimelineStep[];
+type TimelineProps = {
+  currentStep: number;
   orientation?: "horizontal" | "vertical";
   className?: string;
-}
+};
+
+const steps: TimelineStep[] = [
+  {
+    title: "Picked Up",
+  },
+  {
+    title: "Processing",
+  },
+  {
+    title: "Out for Delivery",
+  },
+  {
+    title: "Delivered",
+  },
+];
 
 export function StepperTimeline({
-  steps,
+  currentStep,
   orientation = "horizontal",
   className,
 }: TimelineProps) {
@@ -41,17 +56,17 @@ export function StepperTimeline({
             <div
               className={cn(
                 "absolute border border-dashed border-grey-400",
-                step.status === "completed" && "border-solid border-blue-400",
+                index <= currentStep && "border-solid border-blue-400",
                 isVertical
                   ? cn(
-                      "left-[7px] -top-[16px] h-full border-l-2 border-r-0 border-t-0 border-b-0",
+                      "ltr:left-[7px] rtl:right-[7px] -top-[16px] h-full border-l-2 border-r-0 border-t-0 border-b-0",
                       index === steps.length - 1 && "h-1/2",
                       index === 0 && "h-1/2 top-[12px]"
                     )
                   : cn(
                       "hidden sm:block top-[8px] h-px w-full border-b-2 border-l-0 border-r-0 border-t-0",
                       index === steps.length - 1 && "w-1/2",
-                      index === 0 && "w-1/2 right-0"
+                      index === 0 && "w-1/2 right-0 rtl:left-0 rtl:right-auto"
                     )
               )}
             />
@@ -65,29 +80,27 @@ export function StepperTimeline({
             <div
               className={cn(
                 "relative flex h-4 w-4 shrink-0 items-center justify-center rounded-full border",
-                step.status === "completed"
-                  ? "border-blue-400 bg-primary text-primary-foreground"
+                index <= currentStep
+                  ? "border-blue-400 bg-blue-400 text-white"
                   : step.status === "current"
                   ? "border-primary bg-background"
                   : "border-muted bg-background"
               )}
             >
-              {step.status === "completed" ? (
-                <Check className="h-3 w-3" />
-              ) : null}
+              {index <= currentStep ? <Check className="h-3 w-3" /> : null}
             </div>
 
             {/* Content */}
             <div
               className={cn(
                 "flex min-w-0 flex-col sm:text-center",
-                isVertical ? "mt-0 ml-4" : "mt-1"
+                isVertical ? "mt-0 ltr:ml-4 rtl:mr-4" : "mt-1"
               )}
             >
               <span
                 className={cn(
                   "text-sm font-medium",
-                  step.status === "completed" || step.status === "current"
+                  index <= currentStep || step.status === "current"
                     ? "text-foreground"
                     : "text-muted-foreground"
                 )}

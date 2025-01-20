@@ -95,20 +95,20 @@ export default function TrackingTimeline() {
 function TrackingEvent({ event }: { event: TrackingEvent }) {
   return (
     <div className="relative">
-      <div className="relative pl-6">
+      <div className="relative ltr:pl-6 rtl:pr-6">
         <Circle
-          className="w-3 h-3 text-muted-foreground shrink-0 absolute left-0 top-1.5"
+          className="w-3 h-3 text-muted-foreground shrink-0 absolute ltr:left-0 rtl:right-0 top-1.5"
           fill="currentColor"
         />
         <div className="font-medium">{event.date}</div>
       </div>
 
       <div className="relative flex flex-col gap-4 py-4 ">
-        <div className="absolute h-full left-[6px] border-l-2 top-0" />
+        <div className="absolute h-full ltr:left-[6px] rtl:right-[6px] border-l-2 top-0" />
         {event.events.map((event) => (
           <div
             key={event.description}
-            className={cn("border rounded-lg p-4 ml-6")}
+            className={cn("border rounded-lg p-4 ltr:ml-6 rtl:mr-6")}
           >
             <div className="text-sm text-muted-foreground">{event.time}</div>
             <div className="mt-1">{event.description}</div>

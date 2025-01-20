@@ -1,34 +1,25 @@
 import { StepperTimeline } from "./stepper-timline";
 
-export function Stepper({ state }: { state: string }) {
-  const steps = [
-    {
-      title: "Picked Up",
-      description: "Saturday Nov 10",
-      status: "completed" as const,
-    },
-    {
-      title: "Processing",
-      status: "current" as const,
-    },
-    {
-      title: "Out for Delivery",
-      status: "completed" as const,
-    },
-    {
-      title: "Delivered",
-      status: "completed" as const,
-    },
-  ];
+const status: Record<string, number> = {
+  "Received at warehouse": 1,
+  "في محطة الوصول": 1,
+  "Out for delivery": 2,
+  "جاري تسليم الأوردر": 2,
+  Delivered: 3,
+  "تم تسليم الشحنة": 3,
+};
 
+export function Stepper({ state }: { state: string }) {
+  if (!(state in status)) {
+    return;
+  }
   return (
     <>
-      {state}
-      <StepperTimeline className="hidden sm:flex" steps={steps} />
+      <StepperTimeline className="hidden sm:flex" currentStep={status[state]} />
       <StepperTimeline
         className="block sm:hidden"
         orientation="vertical"
-        steps={steps}
+        currentStep={status[state]}
       />
     </>
   );

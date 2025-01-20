@@ -1,20 +1,28 @@
 import { useQuery, queryOptions } from "@tanstack/react-query";
 import { api } from "@/lib/api-client";
-import { Shipment } from "../type";
+import { Shipment } from "../types";
 import { QueryConfig } from "@/lib/react-query";
+import { useTranslation } from "react-i18next";
 
 export const getShipment = ({
   trackNumber,
+  language,
 }: {
   trackNumber: string;
+  language: string;
 }): Promise<Shipment> => {
-  return api.get(`shipments/track/${trackNumber}`);
+  return api.get(`shipments/track/${trackNumber}`, {
+    params: { lang: language },
+  });
 };
 
-export const getShipmentQueryOptions = (trackNumber: string) => {
+export const getShipmentQueryOptions = (
+  trackNumber: string,
+  language: string
+) => {
   return queryOptions({
-    queryKey: ["shipments", trackNumber],
-    queryFn: () => getShipment({ trackNumber }),
+    queryKey: ["shipments", trackNumber, language],
+    queryFn: () => getShipment({ trackNumber, language }),
   });
 };
 
@@ -27,8 +35,9 @@ export const useShipment = ({
   trackNumber,
   queryConfig,
 }: UseShipmentOptions) => {
+  const { i18n } = useTranslation();
   return useQuery({
-    ...getShipmentQueryOptions(trackNumber),
+    ...getShipmentQueryOptions(trackNumber, i18n.language),
     ...queryConfig,
   });
 };

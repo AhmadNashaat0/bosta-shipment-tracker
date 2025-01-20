@@ -25,7 +25,9 @@ export function ShipmentSearch({
         }}
       >
         <Input
-          className={cn("rounded-r-none rounded-l-lg h-16 bg-background")}
+          className={cn(
+            "rounded-r-none rounded-l-lg rtl:rounded-l-none rtl:rounded-r-lg h-16 bg-background"
+          )}
           type="search"
           placeholder="Tracking No."
           name="trackNumber"
@@ -33,7 +35,9 @@ export function ShipmentSearch({
         />
         <Button
           type="submit"
-          className={cn("rounded-l-none rounded-r-lg  h-16 py-0")}
+          className={cn(
+            "rounded-l-none rounded-r-lg rtl:rounded-l-lg rtl:rounded-r-none h-16 py-0"
+          )}
         >
           <SearchIcon className="w-24 h-24" />
         </Button>
