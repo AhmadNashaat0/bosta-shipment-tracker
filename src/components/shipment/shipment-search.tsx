@@ -3,6 +3,7 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { SearchIcon } from "lucide-react";
 import { useSearchParams } from "@/utils/useSearchParams";
+import { useTranslation } from "react-i18next";
 
 export function ShipmentSearch({
   className,
@@ -12,6 +13,8 @@ export function ShipmentSearch({
   setTrackNumber: (trackNumber: string) => void;
 }) {
   const { getSearchParam, setSearchParam } = useSearchParams();
+  const { t } = useTranslation();
+
   return (
     <div className={cn("hidden sm:block w-full", className)}>
       <form
@@ -29,7 +32,7 @@ export function ShipmentSearch({
             "rounded-r-none rounded-l-lg rtl:rounded-l-none rtl:rounded-r-lg h-16 bg-background"
           )}
           type="search"
-          placeholder="Tracking No."
+          placeholder={t("searchShipmentPlaceholder")}
           name="trackNumber"
           defaultValue={getSearchParam("trackNumber") || undefined}
         />

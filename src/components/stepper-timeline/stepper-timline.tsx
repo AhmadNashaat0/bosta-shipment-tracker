@@ -1,5 +1,6 @@
 import { cn } from "@/utils";
 import { Check } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 type TimelineStep = {
   title: string;
@@ -34,6 +35,7 @@ export function StepperTimeline({
   className,
 }: TimelineProps) {
   const isVertical = orientation === "vertical";
+  const { t } = useTranslation("ShipmentDetails");
 
   return (
     <div
@@ -105,7 +107,7 @@ export function StepperTimeline({
                     : "text-muted-foreground"
                 )}
               >
-                {step.title}
+                {t(step.title)}
               </span>
               {step.description && (
                 <span className="text-xs text-muted-foreground">

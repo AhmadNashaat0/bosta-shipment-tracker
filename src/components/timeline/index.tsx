@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/utils";
 import { Event } from "../shipment/types";
 import { format } from "date-fns";
+import { ar, enUS } from "date-fns/locale";
+import { useTranslation } from "react-i18next";
 
 type TrackingEvent = {
   date: string;
@@ -66,6 +68,8 @@ export default function TrackingTimeline({
 }
 
 function TrackingEvent({ event }: { event: TrackingEvent }) {
+  const { i18n } = useTranslation();
+
   return (
     <div className="relative">
       <div className="relative ltr:pl-6 rtl:pr-6">
@@ -74,7 +78,9 @@ function TrackingEvent({ event }: { event: TrackingEvent }) {
           fill="currentColor"
         />
         <div className="font-medium">
-          {format(event.date, "EEEE, MMMM d, yyyy")}
+          {format(event.date, "EEEE, MMMM d, yyyy", {
+            locale: i18n.language === "ar" ? ar : enUS,
+          })}
         </div>
       </div>
 
@@ -89,7 +95,9 @@ function TrackingEvent({ event }: { event: TrackingEvent }) {
           >
             <div className="text-sm">{event.state}</div>
             <div className="text-sm text-muted-foreground">
-              {format(event.timestamp, "hh:mm a")}
+              {format(event.timestamp, "hh:mm a", {
+                locale: i18n.language === "ar" ? ar : enUS,
+              })}
             </div>
           </div>
         ))}
