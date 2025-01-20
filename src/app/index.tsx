@@ -3,6 +3,8 @@ import Provider from "./provider";
 import { ShipmentPage } from "@/components/shipment";
 import { Header } from "@/components/header";
 import { useTranslation } from "react-i18next";
+import { ErrorBoundary } from "react-error-boundary";
+import { ErrorPage } from "@/components/error/errorPage";
 
 export function App() {
   const { i18n } = useTranslation();
@@ -10,7 +12,9 @@ export function App() {
     <Provider>
       <main dir={i18n.dir(i18n.language)}>
         <Header />
-        <ShipmentPage />
+        <ErrorBoundary fallback={<ErrorPage />}>
+          <ShipmentPage />
+        </ErrorBoundary>
       </main>
     </Provider>
   );
