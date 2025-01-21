@@ -14,11 +14,13 @@ type TrackingEvent = {
 
 export default function TrackingTimeline({
   trackingDetails,
+  isExpanded,
+  setIsExpanded,
 }: {
   trackingDetails: Event[];
+  setIsExpanded: (isExpanded: boolean) => void;
+  isExpanded: boolean;
 }) {
-  const [isExpanded, setIsExpanded] = useState(false);
-
   const fullData = useMemo(
     () => prepareTrackingDetails(trackingDetails),
     [trackingDetails]

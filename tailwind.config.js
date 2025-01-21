@@ -11,6 +11,7 @@ export default {
       },
     },
     extend: {
+      display: ["print"],
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",

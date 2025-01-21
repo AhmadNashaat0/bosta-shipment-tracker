@@ -6,7 +6,7 @@ import { useId, useState } from "react";
 export default function ThemeSwitch() {
   const id = useId();
   const [checked, setChecked] = useState<boolean>(
-    localStorage.getItem("vite-ui-theme") === "light"
+    (localStorage.getItem("vite-ui-theme") ?? "light") === "light"
   );
   const { setTheme } = useTheme();
 

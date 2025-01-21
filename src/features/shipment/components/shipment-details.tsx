@@ -3,19 +3,33 @@ import { Stepper } from "../../../components/stepper-timeline";
 import { Shipment } from "../types";
 import { format, addDays } from "date-fns";
 import { ar, enUS } from "date-fns/locale";
+import CopyButton from "./copy-button";
+import DownloadShipmentButton from "./download-shipment-button";
 
-export function ShipmentDetails({ shipment }: { shipment: Shipment }) {
+export function ShipmentDetails({
+  shipment,
+  setIsExpanded,
+}: {
+  shipment: Shipment;
+  setIsExpanded: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   const { t, i18n } = useTranslation("ShipmentDetails");
   return (
     <div className="relative border rounded-md">
       <div className="p-4 border-b flex flex-col gap-1.5">
-        <p className="text-xs test-muted-foreground">
-          {t("ORDER")} <span className="rtl:hidden ltr:inline">#</span>
-          {shipment.TrackingNumber}
-          <span className="rtl:inline ltr:hidden">#</span>
-        </p>
+        <div className="relative">
+          <p className="text-xs test-muted-foreground">
+            {t("ORDER")} <span className="rtl:hidden ltr:inline">#</span>
+            {shipment.TrackingNumber}
+            <span className="rtl:inline ltr:hidden">#</span>
+          </p>
+          <span className="absolute flex gap-2 top-0 rtl:left-0 ltr:right-0">
+            <DownloadShipmentButton setIsExpanded={setIsExpanded} />
+            <CopyButton />
+          </span>
+        </div>
         <h2 className="text-xl sm:text-3xl font-bold">
-          {shipment.CurrentStatus.state}
+          {shipment.CurrentStatus.state}{" "}
         </h2>
         {shipment.TransitEvents && (
           <>

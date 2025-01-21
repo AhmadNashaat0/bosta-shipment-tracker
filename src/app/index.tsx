@@ -1,10 +1,12 @@
 import "@/i18n";
 import Provider from "./provider";
-import { ShipmentPage } from "@/features/shipment";
 import { Header } from "@/components/header";
 import { useTranslation } from "react-i18next";
 import { ErrorBoundary } from "react-error-boundary";
 import { ErrorPage } from "@/components/error/errorPage";
+import { lazy } from "react";
+
+const ShipmentPage = lazy(() => import("@/features/shipment/ShipmentPage"));
 
 export function App() {
   const { i18n } = useTranslation();
