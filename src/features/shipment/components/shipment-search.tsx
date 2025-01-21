@@ -1,6 +1,6 @@
 import { cn } from "@/utils";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
+import { Button } from "../../../components/ui/button";
+import { Input } from "../../../components/ui/input";
 import { SearchIcon } from "lucide-react";
 import { useSearchParams } from "@/utils/useSearchParams";
 import { useTranslation } from "react-i18next";

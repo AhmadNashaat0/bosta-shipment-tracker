@@ -1,6 +1,6 @@
 import { memo } from "react";
-import TrackingTimeline from "../timeline";
-import { Event } from "./types";
+import TrackingTimeline from "../../../components/timeline";
+import { Event } from "../types";
 import { useTranslation } from "react-i18next";
 
 export const TrackingDetails = memo(

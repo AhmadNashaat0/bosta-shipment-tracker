@@ -1,14 +1,14 @@
 import { useSearchParams } from "@/utils/useSearchParams";
-import { ShipmentDetails } from "./shipment-details";
-import { ShipmentHero } from "./shipment-hero";
-import { ShipmentSearch } from "./shipment-search";
-import { TrackingDetails } from "./tracking-details";
+import { ShipmentDetails } from "./components/shipment-details";
+import { ShipmentHero } from "./components/shipment-hero";
+import { ShipmentSearch } from "./components/shipment-search";
+import { TrackingDetails } from "./components/tracking-details";
 import { useShipment } from "./api/get-shipment";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
-import { ErrorShipmentNotFound } from "../error/errorShipmentNotFound";
+import { ErrorShipmentNotFound } from "../../components/error/errorShipmentNotFound";
 import { ErrorBoundary } from "react-error-boundary";
-import { ErrorPage } from "../error/errorPage";
+import { ErrorPage } from "../../components/error/errorPage";
 
 export function ShipmentPage() {
   const { getSearchParam } = useSearchParams();

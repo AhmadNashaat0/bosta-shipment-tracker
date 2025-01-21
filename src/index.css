@@ -78,4 +78,15 @@
   body {
     @apply bg-background text-foreground;
   }
+  ::-webkit-scrollbar {
+    @apply w-[10px];
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-background;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-input rounded-sm;
+  }
 }

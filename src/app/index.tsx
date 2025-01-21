@@ -1,6 +1,6 @@
 import "@/i18n";
 import Provider from "./provider";
-import { ShipmentPage } from "@/components/shipment";
+import { ShipmentPage } from "@/features/shipment";
 import { Header } from "@/components/header";
 import { useTranslation } from "react-i18next";
 import { ErrorBoundary } from "react-error-boundary";

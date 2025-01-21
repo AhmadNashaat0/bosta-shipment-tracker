@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
-import { Stepper } from "../stepper-timeline";
-import { Shipment } from "./types";
+import { Stepper } from "../../../components/stepper-timeline";
+import { Shipment } from "../types";
 import { format, addDays } from "date-fns";
 import { ar, enUS } from "date-fns/locale";
 

@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { Circle, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/utils";
-import { Event } from "../shipment/types";
+import { Event } from "../../features/shipment/types";
 import { format } from "date-fns";
 import { ar, enUS } from "date-fns/locale";
 import { useTranslation } from "react-i18next";
@@ -11,22 +11,6 @@ type TrackingEvent = {
   date: string;
   events: Event[];
 };
-
-function prepareTrackingDetails(trackingDetails: Event[]) {
-  const result: TrackingEvent[] = [];
-  let prevDate: string;
-  trackingDetails.map((trackingDetail) => {
-    const date = trackingDetail.timestamp.slice(0, 10);
-    if (date === prevDate) {
-      result[result.length - 1].events.push(trackingDetail);
-    } else {
-      prevDate = date;
-      result.push({ date, events: [trackingDetail] });
-    }
-  });
-  result.reverse();
-  return result.map((event) => ({ ...event, events: event?.events.reverse() }));
-}
 
 export default function TrackingTimeline({
   trackingDetails,
@@ -75,7 +59,7 @@ function TrackingEvent({ event }: { event: TrackingEvent }) {
     <div className="relative">
       <div className="relative ltr:pl-6 rtl:pr-6">
         <Circle
-          className="w-3 h-3 text-muted-foreground shrink-0 absolute ltr:left-0 rtl:right-0 top-1.5"
+          className="w-3 h-3 text-muted-foreground/80 shrink-0 absolute ltr:left-0 rtl:right-0 top-1.5"
           fill="currentColor"
         />
         <div className="sm:font-medium">
@@ -86,7 +70,7 @@ function TrackingEvent({ event }: { event: TrackingEvent }) {
       </div>
 
       <div className="relative flex flex-col gap-4 py-4 ">
-        <div className="absolute h-full ltr:left-[6px] rtl:right-[6px] border-l-2 top-0" />
+        <div className="absolute h-full ltr:left-[5.5px] rtl:right-[5.5px] border-l-2 top-0" />
         {event.events.map((event) => (
           <div
             key={event.timestamp}
@@ -105,4 +89,20 @@ function TrackingEvent({ event }: { event: TrackingEvent }) {
       </div>
     </div>
   );
+}
+
+function prepareTrackingDetails(trackingDetails: Event[]) {
+  const result: TrackingEvent[] = [];
+  let prevDate: string;
+  trackingDetails.map((trackingDetail) => {
+    const date = trackingDetail.timestamp.slice(0, 10);
+    if (date === prevDate) {
+      result[result.length - 1].events.push(trackingDetail);
+    } else {
+      prevDate = date;
+      result.push({ date, events: [trackingDetail] });
+    }
+  });
+  result.reverse();
+  return result.map((event) => ({ ...event, events: event?.events.reverse() }));
 }
