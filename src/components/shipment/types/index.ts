@@ -1,6 +1,6 @@
 export type Event = {
   state: string;
-  code: string;
+  code: number;
   timestamp: string;
   exceptionCode?: string;
   msg?: string;

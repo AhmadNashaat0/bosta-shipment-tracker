@@ -38,26 +38,27 @@ export function ShipmentDetails({ shipment }: { shipment: Shipment }) {
             )}
           </>
         )}
-        {shipment.PromisedDate && (
-          <p className="text-sm">
-            {t("expectedDate")} :{" "}
-            <span className="text-accent-teal">
-              {format(shipment.PromisedDate, "MMM d", {
-                locale: i18n.language === "ar" ? ar : enUS,
-              })}
-            </span>{" "}
-            {t("to")}{" "}
-            <span className="text-accent-teal">
-              {format(addDays(shipment.PromisedDate, 2), "MMM d", {
-                locale: i18n.language === "ar" ? ar : enUS,
-              })}
-            </span>
-          </p>
-        )}
+        {shipment.PromisedDate &&
+          ![45, 46].includes(shipment.CurrentStatus.code) &&
+          addDays(shipment.CurrentStatus.timestamp, 0) <=
+            addDays(shipment.PromisedDate, 2) && (
+            <p className="text-sm">
+              {t("expectedDate")} :{" "}
+              <span className="text-accent-teal">
+                {format(shipment.PromisedDate, "MMM d", {
+                  locale: i18n.language === "ar" ? ar : enUS,
+                })}
+              </span>{" "}
+              {t("to")}{" "}
+              <span className="text-accent-teal">
+                {format(addDays(shipment.PromisedDate, 2), "MMM d", {
+                  locale: i18n.language === "ar" ? ar : enUS,
+                })}
+              </span>
+            </p>
+          )}
       </div>
-      {!["تم إرجاعه", "Returned", "canceled"].includes(
-        shipment.CurrentStatus.state
-      ) && (
+      {![46].includes(shipment.CurrentStatus.code) && (
         <div className="pt-6 sm:py-7">
           <div className="px-4 sm:px-0 sm:w-4/5 lg:w-2/3 sm:mx-auto">
             <Stepper
