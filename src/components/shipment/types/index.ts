@@ -7,7 +7,9 @@ export type Event = {
 };
 
 export type Shipment = {
+  TrackingNumber: string;
+  CreateDate: string;
   CurrentStatus: Event;
   TransitEvents?: Event[];
-  TrackingNumber: string;
+  collectedFromBusiness?: string;
 };

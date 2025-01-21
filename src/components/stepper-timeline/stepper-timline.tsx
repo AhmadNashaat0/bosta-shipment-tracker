@@ -1,41 +1,43 @@
 import { cn } from "@/utils";
+import { format } from "date-fns";
+import { ar, enUS } from "date-fns/locale";
 import { Check } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 type TimelineStep = {
   title: string;
-  description?: string;
-  status?: "completed" | "current" | "pending";
+  date?: string;
 };
 
 type TimelineProps = {
   currentStep: number;
+  dates: Record<string, string | undefined>;
   orientation?: "horizontal" | "vertical";
   className?: string;
 };
 
-const steps: TimelineStep[] = [
-  {
-    title: "Picked Up",
-  },
-  {
-    title: "Processing",
-  },
-  {
-    title: "Out for Delivery",
-  },
-  {
-    title: "Delivered",
-  },
-];
-
 export function StepperTimeline({
   currentStep,
+  dates,
   orientation = "horizontal",
   className,
 }: TimelineProps) {
+  const { t, i18n } = useTranslation("ShipmentDetails");
+
   const isVertical = orientation === "vertical";
-  const { t } = useTranslation("ShipmentDetails");
+  const steps: TimelineStep[] = [
+    { title: "Shipment Created", date: dates.created },
+    { title: "Picked Up", date: dates.pucked },
+    {
+      title: "Processing",
+      date: currentStep === 2 ? dates.current : dates.pucked,
+    },
+    {
+      title: "Out for Delivery",
+      date: currentStep === 3 ? dates.current : undefined,
+    },
+    { title: "Delivered" },
+  ];
 
   return (
     <div
@@ -58,7 +60,7 @@ export function StepperTimeline({
             <div
               className={cn(
                 "absolute border border-dashed border-grey-400",
-                index <= currentStep && "border-solid border-blue-400",
+                index <= currentStep && "border-solid border-accent-teal",
                 isVertical
                   ? cn(
                       "ltr:left-[7px] rtl:right-[7px] -top-[16px] h-full border-l-2 border-r-0 border-t-0 border-b-0",
@@ -83,9 +85,7 @@ export function StepperTimeline({
               className={cn(
                 "relative flex h-4 w-4 shrink-0 items-center justify-center rounded-full border",
                 index <= currentStep
-                  ? "border-blue-400 bg-blue-400 text-white"
-                  : step.status === "current"
-                  ? "border-primary bg-background"
+                  ? "border-accent-teal bg-accent-teal text-white "
                   : "border-muted bg-background"
               )}
             >
@@ -102,16 +102,18 @@ export function StepperTimeline({
               <span
                 className={cn(
                   "text-sm font-medium",
-                  index <= currentStep || step.status === "current"
+                  index <= currentStep
                     ? "text-foreground"
                     : "text-muted-foreground"
                 )}
               >
                 {t(step.title)}
               </span>
-              {step.description && (
-                <span className="text-xs text-muted-foreground">
-                  {step.description}
+              {step.date && currentStep != 4 && index <= currentStep && (
+                <span className="text-xs text-muted-foreground pt-1">
+                  {format(step.date, "MMMM d, yyyy", {
+                    locale: i18n.language === "ar" ? ar : enUS,
+                  })}
                 </span>
               )}
             </div>

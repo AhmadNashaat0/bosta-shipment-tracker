@@ -25,7 +25,7 @@ export function LocalSelect() {
       onValueChange={handleLanguageChange}
       dir={i18n.dir(i18n.language)}
     >
-      <SelectTrigger className="w-[100px]  ring-none focus:outline-none focus:ring-0">
+      <SelectTrigger className="w-[65px] px-0 shadow-none border-none ring-none focus:outline-none focus:ring-0">
         <SelectValue placeholder="" />
       </SelectTrigger>
       <SelectContent>

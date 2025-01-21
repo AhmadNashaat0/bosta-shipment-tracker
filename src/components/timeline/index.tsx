@@ -24,7 +24,8 @@ function prepareTrackingDetails(trackingDetails: Event[]) {
       result.push({ date, events: [trackingDetail] });
     }
   });
-  return result;
+  result.reverse();
+  return result.map((event) => ({ ...event, events: event?.events.reverse() }));
 }
 
 export default function TrackingTimeline({

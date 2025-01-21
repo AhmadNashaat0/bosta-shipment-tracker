@@ -1,25 +1,33 @@
 import { StepperTimeline } from "./stepper-timline";
 
 const status: Record<string, number> = {
-  "Received at warehouse": 1,
-  "في محطة الوصول": 1,
-  "Out for delivery": 2,
-  "جاري تسليم الأوردر": 2,
-  Delivered: 3,
-  "تم تسليم الشحنة": 3,
+  "Received at warehouse": 2,
+  "في محطة الوصول": 2,
+  "Out for delivery": 3,
+  "جاري تسليم الأوردر": 3,
+  Delivered: 4,
+  "تم تسليم الشحنة": 4,
 };
 
-export function Stepper({ state }: { state: string }) {
-  if (!(state in status)) {
-    return;
-  }
+export function Stepper({
+  state,
+  dates,
+}: {
+  state: string;
+  dates: Record<string, string | undefined>;
+}) {
   return (
     <>
-      <StepperTimeline className="hidden sm:flex" currentStep={status[state]} />
+      <StepperTimeline
+        className="hidden sm:flex"
+        currentStep={status[state] ? status[state] : dates.pucked ? 1 : 0}
+        dates={dates}
+      />
       <StepperTimeline
         className="block sm:hidden"
         orientation="vertical"
-        currentStep={status[state]}
+        currentStep={status[state] ? status[state] : dates.pucked ? 1 : 0}
+        dates={dates}
       />
     </>
   );

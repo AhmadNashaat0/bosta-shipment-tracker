@@ -24,7 +24,7 @@ export function ShipmentPage() {
   return (
     <>
       <ShipmentHero />
-      <div className="container relative pt-12">
+      <div className="container relative pt-16">
         <ShipmentSearch
           className="absolute left-0 right-0 -top-[30px] z-10"
           setTrackNumber={setTrackNumber}

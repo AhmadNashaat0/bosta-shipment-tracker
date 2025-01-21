@@ -29,7 +29,7 @@ export function ShipmentSearch({
       >
         <Input
           className={cn(
-            "rounded-r-none rounded-l-lg rtl:rounded-l-none rtl:rounded-r-lg h-16 bg-background"
+            "md:text-md text-md rounded-r-none rounded-l-lg rtl:rounded-l-none rtl:rounded-r-lg h-16 bg-background"
           )}
           type="search"
           placeholder={t("searchShipmentPlaceholder")}
@@ -38,11 +38,12 @@ export function ShipmentSearch({
         />
         <Button
           type="submit"
+          size={"icon"}
           className={cn(
-            "rounded-l-none rounded-r-lg rtl:rounded-l-lg rtl:rounded-r-none h-16 py-0"
+            "bg-accent-red hover:bg-accent-red/85 rounded-l-none rounded-r-lg rtl:rounded-l-lg rtl:rounded-r-none h-16 px-6 [&_svg]:size-6"
           )}
         >
-          <SearchIcon className="w-24 h-24" />
+          <SearchIcon className="w-8 h-8 " />
         </Button>
       </form>
     </div>
