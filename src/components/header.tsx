@@ -23,7 +23,7 @@ export function Header() {
             className="w-20 sm:w-auto"
           />
         )}
-        <div className="flex gap-2 items-center">
+        <div className="flex gap-2  items-center">
           <ThemeSwitch />
           <LocalSelect />
         </div>

@@ -43,7 +43,7 @@ export function ShipmentSearch({
             "bg-accent-red hover:bg-accent-red/85 rounded-l-none rounded-r-lg rtl:rounded-l-lg rtl:rounded-r-none h-12 sm:h-16 px-6 [&_svg]:size-6"
           )}
         >
-          <SearchIcon className="w-8 h-8 " />
+          <SearchIcon className="w-8 h-8 text-white" />
         </Button>
       </form>
     </div>
