@@ -6,6 +6,8 @@ export default {
     title: "تتبع شحنتك",
   },
   ShipmentDetails: {
+    to: "الي",
+    expectedDate: "تاريخ التسليم المتوقع",
     ORDER: "رقم الشحنة",
     "Shipment Created": "تم إنشاء الشحنة",
     "Picked Up": "تم استلام الطلب",

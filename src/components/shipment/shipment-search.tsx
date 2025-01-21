@@ -16,7 +16,7 @@ export function ShipmentSearch({
   const { t } = useTranslation();
 
   return (
-    <div className={cn("hidden sm:block w-full", className)}>
+    <div className={cn("w-full", className)}>
       <form
         className={cn("flex w-full max-w-md items-center mx-auto")}
         onSubmit={(event) => {
@@ -29,7 +29,7 @@ export function ShipmentSearch({
       >
         <Input
           className={cn(
-            "md:text-md text-md rounded-r-none rounded-l-lg rtl:rounded-l-none rtl:rounded-r-lg h-16 bg-background"
+            "md:text-md text-md rounded-r-none rounded-l-lg rtl:rounded-l-none rtl:rounded-r-lg h-12 sm:h-16 bg-background"
           )}
           type="search"
           placeholder={t("searchShipmentPlaceholder")}
@@ -40,7 +40,7 @@ export function ShipmentSearch({
           type="submit"
           size={"icon"}
           className={cn(
-            "bg-accent-red hover:bg-accent-red/85 rounded-l-none rounded-r-lg rtl:rounded-l-lg rtl:rounded-r-none h-16 px-6 [&_svg]:size-6"
+            "bg-accent-red hover:bg-accent-red/85 rounded-l-none rounded-r-lg rtl:rounded-l-lg rtl:rounded-r-none h-12 sm:h-16 px-6 [&_svg]:size-6"
           )}
         >
           <SearchIcon className="w-8 h-8 " />

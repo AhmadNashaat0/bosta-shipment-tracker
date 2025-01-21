@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { Stepper } from "../stepper-timeline";
 import { Shipment } from "./types";
-import { format } from "date-fns";
+import { format, addDays } from "date-fns";
 import { ar, enUS } from "date-fns/locale";
 
 export function ShipmentDetails({ shipment }: { shipment: Shipment }) {
@@ -14,7 +14,9 @@ export function ShipmentDetails({ shipment }: { shipment: Shipment }) {
           {shipment.TrackingNumber}
           <span className="rtl:inline ltr:hidden">#</span>
         </p>
-        <h2 className="text-3xl font-bold">{shipment.CurrentStatus.state}</h2>
+        <h2 className="text-xl sm:text-3xl font-bold">
+          {shipment.CurrentStatus.state}
+        </h2>
         {shipment.TransitEvents && (
           <>
             <p className="text-sm">
@@ -36,12 +38,28 @@ export function ShipmentDetails({ shipment }: { shipment: Shipment }) {
             )}
           </>
         )}
+        {shipment.PromisedDate && (
+          <p className="text-sm">
+            {t("expectedDate")} :{" "}
+            <span className="text-accent-teal">
+              {format(shipment.PromisedDate, "MMM d", {
+                locale: i18n.language === "ar" ? ar : enUS,
+              })}
+            </span>{" "}
+            {t("to")}{" "}
+            <span className="text-accent-teal">
+              {format(addDays(shipment.PromisedDate, 2), "MMM d", {
+                locale: i18n.language === "ar" ? ar : enUS,
+              })}
+            </span>
+          </p>
+        )}
       </div>
       {!["تم إرجاعه", "Returned", "canceled"].includes(
         shipment.CurrentStatus.state
       ) && (
-        <div className="py-7">
-          <div className="px-4 sm:px-0 sm:w-2/3 sm:mx-auto">
+        <div className="pt-6 sm:py-7">
+          <div className="px-4 sm:px-0 sm:w-4/5 lg:w-2/3 sm:mx-auto">
             <Stepper
               state={shipment.CurrentStatus.state}
               dates={{

@@ -8,7 +8,9 @@ export const TrackingDetails = memo(
     const { t } = useTranslation("ShipmentDetails");
     return (
       <div className="py-10 flex flex-col gap-4">
-        <h3 className="text-2xl font-semibold">{t("Tracking Details")}</h3>
+        <h3 className="text-xl sm:text-2xl font-semibold">
+          {t("Tracking Details")}
+        </h3>
         <TrackingTimeline trackingDetails={trackingDetails} />
       </div>
     );

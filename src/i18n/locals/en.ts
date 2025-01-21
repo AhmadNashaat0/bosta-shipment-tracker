@@ -6,6 +6,8 @@ export default {
     title: "Track Your Order",
   },
   ShipmentDetails: {
+    to: "to",
+    expectedDate: "Expected Delivery Date",
     ORDER: "ORDER",
     "Shipment Created": "Shipment Created",
     "Picked Up": "Picked Up",

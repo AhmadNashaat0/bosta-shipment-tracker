@@ -11,17 +11,19 @@ export default function ThemeSwitch() {
   );
   const { setTheme } = useTheme();
 
+  const handleChange = (value: boolean) => {
+    setChecked(value);
+    setTheme(value ? "light" : "dark");
+  };
+
   return (
     <div>
       <div className="relative inline-grid h-9 grid-cols-[1fr_1fr] items-center text-sm font-medium">
         <Switch
           id={id}
           checked={checked}
-          onCheckedChange={(value) => {
-            setChecked(value);
-            setTheme(value ? "light" : "dark");
-          }}
-          className="peer absolute inset-0 h-[inherit] w-auto data-[state=checked]:bg-input/50 data-[state=unchecked]:bg-input/50 [&_span]:h-full [&_span]:w-1/2 [&_span]:transition-transform [&_span]:duration-300 [&_span]:[transition-timing-function:cubic-bezier(0.16,1,0.3,1)] data-[state=checked]:[&_span]:translate-x-full rtl:data-[state=checked]:[&_span]:-translate-x-full"
+          onCheckedChange={handleChange}
+          className="peer absolute inset-0 h-[inherit] w-auto data-[state=checked]:bg-background/50 data-[state=unchecked]:bg-background/50 [&_span]:h-full [&_span]:w-1/2 [&_span]:transition-transform [&_span]:duration-300 [&_span]:[transition-timing-function:cubic-bezier(0.16,1,0.3,1)] data-[state=checked]:[&_span]:translate-x-full rtl:data-[state=checked]:[&_span]:-translate-x-full"
         />
         <span className="pointer-events-none relative ms-0.5 flex min-w-8 items-center justify-center text-center peer-data-[state=checked]:text-muted-foreground/70">
           <Moon size={16} strokeWidth={2} aria-hidden="true" />

@@ -78,7 +78,7 @@ function TrackingEvent({ event }: { event: TrackingEvent }) {
           className="w-3 h-3 text-muted-foreground shrink-0 absolute ltr:left-0 rtl:right-0 top-1.5"
           fill="currentColor"
         />
-        <div className="font-medium">
+        <div className="sm:font-medium">
           {format(event.date, "EEEE, MMMM d, yyyy", {
             locale: i18n.language === "ar" ? ar : enUS,
           })}

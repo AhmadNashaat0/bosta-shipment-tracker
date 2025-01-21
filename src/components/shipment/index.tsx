@@ -26,7 +26,7 @@ export function ShipmentPage() {
       <ShipmentHero />
       <div className="container relative pt-16">
         <ShipmentSearch
-          className="absolute left-0 right-0 -top-[30px] z-10"
+          className="container absolute left-0 right-0 -top-[30px] z-10"
           setTrackNumber={setTrackNumber}
         />
         {shipmentQuery.isLoading && (
