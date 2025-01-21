@@ -6,7 +6,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { locals } from "@/i18n/locals";
-import { useCallback, useId, useState } from "react";
+import { useCallback, useId } from "react";
 import { useTranslation } from "react-i18next";
 
 export function LocalSelect() {
