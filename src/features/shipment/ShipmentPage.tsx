@@ -49,22 +49,21 @@ export default function ShipmentPage() {
                 </div>
               }
             >
-              <section
-                id="shipmentInfo"
-                className="bg-background animate-fade-up animate-duration-700"
-              >
-                <ShipmentDetails
-                  shipment={shipmentQuery.data}
-                  setIsExpanded={setIsExpanded}
-                />
-                {shipmentQuery.data.TransitEvents && (
-                  <TrackingDetails
-                    trackingDetails={shipmentQuery.data.TransitEvents}
-                    isExpanded={isExpanded}
+              <main className="animate-fade-up animate-duration-700">
+                <section id="shipmentInfo" className="bg-background">
+                  <ShipmentDetails
+                    shipment={shipmentQuery.data}
                     setIsExpanded={setIsExpanded}
                   />
-                )}
-              </section>
+                  {shipmentQuery.data.TransitEvents && (
+                    <TrackingDetails
+                      trackingDetails={shipmentQuery.data.TransitEvents}
+                      isExpanded={isExpanded}
+                      setIsExpanded={setIsExpanded}
+                    />
+                  )}
+                </section>
+              </main>
             </Suspense>
           </ErrorBoundary>
         )}
