@@ -49,7 +49,10 @@ export default function ShipmentPage() {
                 </div>
               }
             >
-              <section id="shipmentInfo" className="bg-background">
+              <section
+                id="shipmentInfo"
+                className="bg-background animate-fade-up animate-duration-700"
+              >
                 <ShipmentDetails
                   shipment={shipmentQuery.data}
                   setIsExpanded={setIsExpanded}
